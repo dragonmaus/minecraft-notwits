@@ -15,14 +15,14 @@ repositories {
 }
 
 internal val minecraftVersion: String by project
-internal val yarnMappings: String by project
+internal val yarnMappingsVersion: String by project
 internal val loaderVersion: String by project
 internal val fabricVersion: String by project
 internal val fabricKotlinVersion: String by project
 
 dependencies {
     minecraft("com.mojang:minecraft:$minecraftVersion")
-    mappings("net.fabricmc:yarn:$yarnMappings")
+    mappings("net.fabricmc:yarn:$yarnMappingsVersion")
     modImplementation("net.fabricmc:fabric-loader:$loaderVersion")
     modImplementation("net.fabricmc.fabric-api:fabric-api:$fabricVersion")
     modImplementation("net.fabricmc:fabric-language-kotlin:$fabricKotlinVersion")

@@ -12,6 +12,8 @@ object Notwits : ModInitializer {
 
     override fun onInitialize() {
         ServerEntityEvents.ENTITY_LOAD.register { entity, world ->
+            if (world.isClient) return@register
+
             when (entity) {
                 is VillagerEntity -> {
                     if (entity.villagerData.profession == VillagerProfession.NITWIT) {

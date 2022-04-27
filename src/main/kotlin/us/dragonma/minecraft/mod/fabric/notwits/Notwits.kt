@@ -8,7 +8,7 @@ import net.minecraft.village.VillagerProfession
 
 @Suppress("unused")
 object Notwits : ModInitializer {
-    private const val MOD_ID = "notwits"
+    private const val MOD_ID = "$[id]"
 
     override fun onInitialize() {
         ServerEntityEvents.ENTITY_LOAD.register { entity, world ->

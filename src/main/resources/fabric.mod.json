@@ -1,33 +1,33 @@
 {
   "schemaVersion": 1,
-  "id": "notwits",
+  "id": "${id}",
   "version": "${version}",
-  "name": "Notwits",
-  "description": "Force nitwits to become productive members of society.",
-  "authors": [
-    "DragonMaus"
-  ],
+
+  "name": "${name}",
+  "description": "${description}",
   "contact": {
-    "issues": "https://github.com/dragonmaus/minecraft-notwits/issues",
-    "sources": "https://github.com/dragonmaus/minecraft-notwits"
+    "issues": "${source}/issues",
+    "sources": "${source}"
   },
-  "license": "BSD 3-Clause Clear License",
-  "icon": "assets/notwits/icon.png",
+  "authors": ["${author}"],
+  "license": "${license}",
+  "icon": "assets/${id}/icon.png",
+
   "environment": "*",
   "entrypoints": {
     "main": [
       {
         "adapter": "kotlin",
-        "value": "us.dragonma.minecraft.mod.fabric.notwits.Notwits"
+        "value": "${group}.minecraft.mod.fabric.${id}.${name}"
       }
     ]
   },
-  "mixins": [],
+
   "depends": {
-    "java": "${javaVersion}",
-    "minecraft": "${minecraftVersion}",
-    "fabricloader": ">=${loaderVersion}",
-    "fabric": "*",
-    "fabric-language-kotlin": ">=${fabricKotlinVersion}"
+    "java": ">=${java}",
+    "minecraft": "${minecraft}",
+    "fabric": ">=${fabric}",
+    "fabricloader": ">=${fabric_loader}",
+    "fabric-language-kotlin": ">=${fabric_kotlin}"
   }
 }

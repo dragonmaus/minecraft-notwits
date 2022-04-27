@@ -1,5 +1,4 @@
-internal val projectName: String by settings
-rootProject.name = projectName
+rootProject.name = settings.extra["project.id"] as String
 
 pluginManagement {
     repositories {
@@ -9,13 +8,11 @@ pluginManagement {
     }
 
     plugins {
-        val kotlinVersion: String by settings
-        kotlin("jvm") version kotlinVersion
+        kotlin("jvm") version settings.extra["kotlin.version"] as String
 
-        val ktlintVersion: String by settings
-        id("org.jlleitschuh.gradle.ktlint") version ktlintVersion
+        id("net.kyori.blossom") version settings.extra["blossom.version"] as String
+        id("org.jlleitschuh.gradle.ktlint") version settings.extra["ktlint.version"] as String
 
-        val loomVersion: String by settings
-        id("fabric-loom") version loomVersion
+        id("fabric-loom") version settings.extra["loom.version"] as String
     }
 }

@@ -5,6 +5,7 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 plugins {
     kotlin("jvm")
 
+    id("net.kyori.blossom")
     id("org.jlleitschuh.gradle.ktlint")
 
     id("fabric-loom")
@@ -14,28 +15,26 @@ repositories {
     maven("https://maven.fabricmc.net/") { name = "Fabric" }
 }
 
-internal val minecraftVersion: String by project
-internal val yarnMappingsVersion: String by project
-internal val loaderVersion: String by project
-internal val fabricVersion: String by project
-internal val fabricKotlinVersion: String by project
+internal val minecraftVersion = project.property("minecraft.version")
+internal val fabricVersion = project.property("fabric.version")
+internal val fabricLoaderVersion = project.property("fabric.loader.version")
+internal val fabricKotlinVersion = project.property("fabric.kotlin.version")
 
 dependencies {
     minecraft("com.mojang:minecraft:$minecraftVersion")
-    mappings("net.fabricmc:yarn:$yarnMappingsVersion")
-    modImplementation("net.fabricmc:fabric-loader:$loaderVersion")
+    mappings("net.fabricmc:yarn:${project.property("yarn.mappings.version")}")
+    modImplementation("net.fabricmc:fabric-loader:$fabricLoaderVersion")
     modImplementation("net.fabricmc.fabric-api:fabric-api:$fabricVersion")
     modImplementation("net.fabricmc:fabric-language-kotlin:$fabricKotlinVersion")
 }
 
-internal val projectGroup: String by project
-internal val projectVersion: String by project
+internal val projectGroup = project.property("project.group")
+internal val projectVersion = project.property("project.version")
 
-group = projectGroup
-version = projectVersion
+group = projectGroup as String
+version = projectVersion as String
 
-internal val javaVersion: String by project
-
+internal val javaVersion = project.property("java.version") as String
 java {
     val javaVersion = JavaVersion.toVersion(javaVersion)
 
@@ -48,6 +47,9 @@ java {
     }
     withSourcesJar()
 }
+
+internal val projectId = project.property("project.id")
+internal val projectName = project.property("project.name")
 
 tasks {
     withType<JavaCompile> {
@@ -64,21 +66,33 @@ tasks {
     }
 
     jar {
-        from("LICENSE") { rename { "$it.${project.name}" } }
+        from("LICENSE") { rename { "$it.$projectId" } }
     }
 
     processResources {
-        inputs.property("version", project.version)
+        inputs.property("version", projectVersion)
         filesMatching("fabric.mod.json") {
             expand(
-                mutableMapOf(
-                    "version" to project.version,
-                    "javaVersion" to javaVersion,
-                    "minecraftVersion" to minecraftVersion,
-                    "loaderVersion" to loaderVersion,
-                    "fabricKotlinVersion" to fabricKotlinVersion,
-                ),
+                "group" to projectGroup,
+                "id" to projectId,
+                "version" to projectVersion,
+
+                "name" to projectName,
+                "description" to project.property("project.description"),
+                "source" to project.property("project.source_uri"),
+                "author" to project.property("project.author"),
+                "license" to project.property("project.license"),
+
+                "java" to project.property("java.version"),
+                "minecraft" to minecraftVersion,
+                "fabric" to fabricVersion,
+                "fabric_loader" to fabricLoaderVersion,
+                "fabric_kotlin" to fabricKotlinVersion,
             )
         }
     }
+}
+
+blossom {
+    replaceToken("$[id]", projectId)
 }

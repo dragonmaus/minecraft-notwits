@@ -4,7 +4,7 @@ A simple server-side Fabric mod that resets nitwits as soon as they are spawned 
 
 ----
 
-[![Latest Release: v1.1.1](https://badgen.net/badge/Latest%20Release/v1.1.1/4078c0?icon=github "Latest Release: v1.1.1")](https://github.com/dragonmaus/minecraft-notwits/releases/tag/v1.1.1 "Notwits Release v1.1.1")
+[![Latest Release: v1.1.2](https://badgen.net/badge/Latest%20Release/v1.1.2/4078c0?icon=github "Latest Release: v1.1.2")](https://github.com/dragonmaus/minecraft-notwits/releases/tag/v1.1.2 "Notwits Release v1.1.2")
 
 [![Minecraft: 1.18.2](https://badgen.net/badge/Minecraft/1.18.2/3b8526 "Minecraft: 1.18.2")](https://www.minecraft.net/ "Minecraft")
 [![Mod Loader: Fabric](https://badgen.net/badge/Mod%20Loader/Fabric/dbd0b4 "Mod Loader: Fabric")](https://fabricmc.net/ "Fabric")

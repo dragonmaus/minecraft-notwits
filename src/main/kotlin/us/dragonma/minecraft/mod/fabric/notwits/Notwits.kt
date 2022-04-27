@@ -15,13 +15,13 @@ object Notwits : ModInitializer {
     private val DEBUG = System.getProperty("$[id].debug", "false").toBoolean()
 
     override fun onInitialize() {
-        LOGGER.info("Loading version $[version].")
+        LOGGER.info("[$[name]] Loading version $[version].")
 
         ServerEntityEvents.ENTITY_LOAD.register { entity, world ->
             if (world.isClient) return@register
 
             if (entity is VillagerDataContainer && entity.villagerData.profession == VillagerProfession.NITWIT) {
-                if (DEBUG) LOGGER.info("Forcing ${Language.getInstance()[entity.type.translationKey]} at [${entity.x}, ${entity.y}, ${entity.z}] to become a productive member of society.")
+                if (DEBUG) LOGGER.info("[$[name]] Forcing ${Language.getInstance()[entity.type.translationKey]} at [${entity.x}, ${entity.y}, ${entity.z}] to become a productive member of society.")
 
                 entity.villagerData = entity.villagerData.withProfession(VillagerProfession.NONE)
                 if (entity is VillagerEntity) {

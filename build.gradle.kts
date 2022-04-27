@@ -95,4 +95,7 @@ tasks {
 
 blossom {
     replaceToken("$[id]", projectId)
+    replaceToken("$[version]", projectVersion)
+
+    replaceToken("$[name]", projectName)
 }

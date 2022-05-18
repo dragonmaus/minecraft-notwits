@@ -28,11 +28,10 @@ dependencies {
     modImplementation("net.fabricmc:fabric-language-kotlin:$fabricKotlinVersion")
 }
 
-internal val projectGroup = project.property("project.group")
-internal val projectVersion = project.property("project.version")
+group = project.property("project.group") as String
+version = project.property("project.version") as String
 
-group = projectGroup as String
-version = projectVersion as String
+description = project.property("project.description") as String
 
 internal val javaVersion = project.property("java.version") as String
 java {
@@ -47,9 +46,6 @@ java {
     }
     withSourcesJar()
 }
-
-internal val projectId = project.property("project.id")
-internal val projectName = project.property("project.name")
 
 tasks {
     withType<JavaCompile> {
@@ -66,19 +62,19 @@ tasks {
     }
 
     jar {
-        from("LICENSE") { rename { "$it.$projectId" } }
+        from("LICENSE") { rename { "$it.${project.name}" } }
     }
 
     processResources {
-        inputs.property("version", projectVersion)
+        inputs.property("version", project.version)
         filesMatching("fabric.mod.json") {
             expand(
-                "group" to projectGroup,
-                "id" to projectId,
-                "version" to projectVersion,
+                "group" to project.group,
+                "name" to project.name,
+                "version" to project.version,
 
-                "name" to projectName,
-                "description" to project.property("project.description"),
+                "displayName" to project.displayName,
+                "description" to project.description,
                 "source" to project.property("project.source_uri"),
                 "author" to project.property("project.author"),
                 "license" to project.property("project.license"),
@@ -94,8 +90,8 @@ tasks {
 }
 
 blossom {
-    replaceToken("$[id]", projectId)
-    replaceToken("$[version]", projectVersion)
+    replaceToken("$[name]", project.name)
+    replaceToken("$[version]", project.version)
 
-    replaceToken("$[name]", projectName)
+    replaceToken("$[displayName]", project.displayName)
 }

@@ -1,4 +1,4 @@
-rootProject.name = settings.extra["project.id"] as String
+rootProject.name = settings.extra["project.name"] as String
 
 pluginManagement {
     repositories {

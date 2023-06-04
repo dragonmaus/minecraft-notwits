@@ -9,7 +9,9 @@
     "issues": "${source}/issues",
     "sources": "${source}"
   },
-  "authors": ["${author}"],
+  "authors": [
+    "${author}"
+  ],
   "license": "${license}",
   "icon": "assets/${name}/icon.png",
 
